@@ -3,3 +3,16 @@ canvas-whiteboard {
     height: 80vh;
 }
 
+.canvas_whiteboard_buttons{
+    padding: 0px !important;
+}
+
+.canvasContainer:-ms-fullscreen > canvas-whiteboard{
+    height:100%;
+}
+.canvasContainer:-moz-full-screen > canvas-whiteboard{
+    height:100%;
+}
+.canvasContainer:-webkit-full-screen > canvas-whiteboard{
+    height:100%;
+}

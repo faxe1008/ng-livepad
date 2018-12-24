@@ -13,10 +13,11 @@ export class HomePanel{
   public livePadService: LivePadService;
   public router : Router;
 
-  constructor(public _livePadService : LivePadService, private _router: Router){
+  constructor(public _livePadService : LivePadService,
+              private _router: Router){
     this.livePadService = _livePadService;
     this.router = _router;
-    this.qrcontent = "livepad://" + this.livePadService.uuid;
+    this.qrcontent = this.livePadService.uuid;
   }
  
   navDraw(){

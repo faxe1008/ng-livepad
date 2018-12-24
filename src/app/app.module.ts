@@ -11,7 +11,7 @@ import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 import { MQTT_SERVICE_OPTIONS } from './services/mqtt.service'
 import { MqttModule } from 'ngx-mqtt';
 import { AppRoutingModule } from './app-routing.module';
-import { LivePadService } from './services/livepad.service';
+import { LivePadService  } from './services/livepad.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AvatarModule } from 'ng2-avatar';
 import { UserDisplayComponent } from './components/user-display/user-display.component';
