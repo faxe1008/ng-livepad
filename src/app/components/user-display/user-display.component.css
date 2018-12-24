@@ -1,0 +1,11 @@
+
+mat-expansion-panel{
+    position: relative;
+    text-align: left;
+}
+  
+  avatar{
+    vertical-align:middle;
+    display: inline-block;
+    margin-right: 5px;
+  }

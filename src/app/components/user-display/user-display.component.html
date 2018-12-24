@@ -1,0 +1,14 @@
+<mat-expansion-panel>
+
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Users
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  
+  <div *ngFor="let user of livePadService.users" style="margin-bottom: 5px;">
+      <avatar [name]="user.name" [displayType]="'circle'" size="20" [background]="user.color"></avatar>
+      <div style="display: inline-block">{{user.name}}</div>
+  </div>
+
+</mat-expansion-panel>

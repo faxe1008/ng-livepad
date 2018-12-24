@@ -1,0 +1,25 @@
+qrcode{
+   display: inline-block;
+}
+
+.center{
+    max-width:400px;
+    margin: 10px auto;
+    text-align: center;
+}
+  
+  .main-div{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-card-content>div{
+    margin-bottom:5px;
+  }
+
+  .matcard-header-image {
+    background-image: url('../../../assets/logo.png');
+    background-size: cover;
+  }

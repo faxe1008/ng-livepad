@@ -1,0 +1,25 @@
+<div class="main-div">
+    <mat-card class="z-depth center" flex="50">
+        <mat-card-header>
+            <div mat-card-avatar class="matcard-header-image"></div>
+            <mat-card-title>Welcome to LivePad!</mat-card-title>
+            <mat-card-subtitle>Sketch your ideas and collaborate</mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content>
+            <div>Scan the QR Code down below to get started!</div>
+            <div style="padding:15px; background:white;">
+                <qrcode [qrdata]="qrcontent" [size]="256" [level]="'M'"></qrcode>
+            </div>
+            <div *ngIf="livePadService.users.length > 0">
+                <user-display></user-display>
+            </div>
+            <div *ngIf="livePadService.users.length > 0">
+                <button (click)="navDraw()"  mat-raised-button color="accent">Start Drawing >></button>
+            </div>
+            <div>
+                 Get the <a href="#">LivePad App</a>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
