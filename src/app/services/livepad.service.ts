@@ -2,16 +2,27 @@ import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { EncryptionService } from 'angular-encryption-service';
 import { UUID } from 'angular2-uuid';
+import { ReplaySubject, Observable } from 'rxjs';
 
 @Injectable()
 export class LivePadService {
     uuid: string;
     users: User[] = [];
     encryptionKey: string;
+    userStream: ReplaySubject<User> = new ReplaySubject();
 
     constructor(private _encryptionService: EncryptionService) {
         this.uuid = UUID.UUID();
         this.encryptionKey = this.randomString(12, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');        
+    }
+
+    onUserJoined(): Observable<User> {
+        return this.userStream.asObservable();
+    }
+
+    joinUser(user: User){
+        this.users.push(user);
+        this.userStream.next(user);
     }
 
     encryptMessage(message: string) {
