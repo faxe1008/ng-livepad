@@ -32,6 +32,14 @@ export class AppComponent {
       const requestingUser = new User(message.topic.split('/')[2]);
       livePadService.joinUser(requestingUser);
 
+      if(this.router.url === '/'){
+        let response = {
+          color : requestingUser.color,
+          history : []
+        }
+        this.mqttService.unsafePublish(this.livePadService.uuid + '/join/' + requestingUser.name + '/accepted', JSON.stringify(response));
+      }
+
       this.snackBar.openFromComponent(SnackbarMessageComponent,  {
         panelClass : 'snackbarNotification',
         duration: 3000,
