@@ -28,6 +28,7 @@
     "hash-base": "^3.0.4",
     "ng2-avatar": "^2.3.1",
     "ng2-canvas-whiteboard": "^3.0.4",
+    "ng2-web-cryptography": "0.0.3",
     "ngx-mqtt": "^6.8.2",
     "node-sass": "^4.11.0",
     "rxjs": "~6.3.3",
