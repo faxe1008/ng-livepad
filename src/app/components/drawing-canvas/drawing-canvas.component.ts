@@ -1,48 +1,53 @@
 import { Component, ElementRef, QueryList, ViewChild  } from '@angular/core';
-import { CanvasWhiteboardComponent, CanvasWhiteboardUpdate, CanvasWhiteboardService, CanvasWhiteboardShapeOptions } from 'ng2-canvas-whiteboard';
+import { CanvasWhiteboardComponent, CanvasWhiteboardUpdate, CanvasWhiteboardService } from 'ng2-canvas-whiteboard';
 import { LivePadService } from '../../services/livepad.service';
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
+import { MatDialog } from '@angular/material';
 import { User } from '../../model/user';
+import { QrcodeDialogComponent } from '../qrcode-dialog/qrcode-dialog.component';
 
 @Component({
-  selector: 'drawing-canvas',
+  selector: 'app-drawing-canvas',
   templateUrl: './drawing-canvas.component.html',
   viewProviders: [CanvasWhiteboardComponent],
   styleUrls: ['./drawing-canvas.component.css']
 })
-export class DrawingCanvas{
-  private livePadService : LivePadService;
-  private mqttService : MqttService;
+export class DrawingCanvasComponent {
+ 
 
-  //@ViewChild(CanvasWhiteboardComponent, { read: ElementRef }) canvasElement:ElementRef; 
   @ViewChild('canvasContainer', {read : ElementRef}) canvasContainer: ElementRef;
+  @ViewChild('canvasWhiteboard') canvas: CanvasWhiteboardComponent; 
 
-  @ViewChild('canvasWhiteboard') canvas:CanvasWhiteboardComponent; 
+  constructor(public livePadService: LivePadService,
+              public dialog: MatDialog,
+              private mqttService: MqttService, 
+              private canvasWhiteboardService: CanvasWhiteboardService) {
 
-  constructor(public _livePadService : LivePadService,
-              private _mqttService : MqttService, 
-              private _canvasWhiteboardService: CanvasWhiteboardService){
 
-    this.livePadService = _livePadService;
-    this.mqttService = _mqttService;
-
-    this._mqttService.observe(_livePadService.uuid + "/draw/#").subscribe((message: IMqttMessage)=>{
-      let user = this.livePadService.getUserByName(message.topic.split("/")[2]);
-      let plainMessage = message.payload.toString();
-      let update = CanvasWhiteboardUpdate.deserializeJson(plainMessage);
+    this.mqttService.observe(livePadService.uuid + '/draw/#').subscribe((message: IMqttMessage) => {
+      const user = this.livePadService.getUserByName(message.topic.split('/')[2]);
+      const plainMessage = message.payload.toString();
+      const update = CanvasWhiteboardUpdate.deserializeJson(plainMessage);
       
       update.selectedShapeOptions.fillStyle = user.color;
       update.selectedShapeOptions.strokeStyle = user.color;
   
-      this._canvasWhiteboardService.drawCanvas([update]);
+      this.canvasWhiteboardService.drawCanvas([update]);
 
-    })
+    });
 
   }
 
-  sendBatchUpdate(updates: CanvasWhiteboardUpdate[]){
+  openQRCodeDialog() {
+    const dialogRef = this.dialog.open(QrcodeDialogComponent, {
+      width: '500px',
+      data: {qrcontent: this.livePadService.uuid + '|' + this.livePadService.encryptionKey}
+    });
+  }
+
+  sendBatchUpdate(updates: CanvasWhiteboardUpdate[]) {
     console.log(JSON.stringify(updates));
   }
 
@@ -62,8 +67,8 @@ export class DrawingCanvas{
     }
   }
 
-  downloadImage(){
-    this.canvas.downloadCanvasImage("image/png", null, "customFileName");
+  downloadImage() {
+    this.canvas.downloadCanvasImage('image/png', null, 'customFileName');
   }
 
 }

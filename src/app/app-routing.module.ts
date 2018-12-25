@@ -1,11 +1,11 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePanel } from './components/home-panel/home-panel.component';
-import { DrawingCanvas } from './components/drawing-canvas/drawing-canvas.component';
+import { HomePanelComponent } from './components/home-panel/home-panel.component';
+import { DrawingCanvasComponent } from './components/drawing-canvas/drawing-canvas.component';
 
 const routes: Routes = [
-  { path: '', component: HomePanel },
-  { path: 'draw', component: DrawingCanvas },
+  { path: '', component: HomePanelComponent },
+  { path: 'draw', component: DrawingCanvasComponent },
 ];
 
 

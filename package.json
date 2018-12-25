@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
+    "angular-encryption-service": "^0.1.0",
     "angular2-uuid": "^1.1.1",
     "angularx-qrcode": "^1.5.1",
     "core-js": "^2.5.4",
@@ -32,7 +33,10 @@
     "ngx-mqtt": "^6.8.2",
     "node-sass": "^4.11.0",
     "rxjs": "~6.3.3",
+    "text-encoding": "^0.7.0",
+    "text-encoding-utf-8": "^1.0.2",
     "tslib": "^1.9.0",
+    "typescript-base64-arraybuffer": "^0.1.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

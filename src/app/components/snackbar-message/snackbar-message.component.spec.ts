@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SnackbarReconnectComponent } from './snackbar-reconnect.component';
+import { SnackbarMessageComponent } from './snackbar-message.component';
 
-describe('SnackbarReconnectComponent', () => {
-  let component: SnackbarReconnectComponent;
-  let fixture: ComponentFixture<SnackbarReconnectComponent>;
+describe('SnackbarMessageComponent', () => {
+  let component: SnackbarMessageComponent;
+  let fixture: ComponentFixture<SnackbarMessageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SnackbarReconnectComponent ]
+      declarations: [ SnackbarMessageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SnackbarReconnectComponent);
+    fixture = TestBed.createComponent(SnackbarMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

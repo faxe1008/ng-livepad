@@ -3,24 +3,19 @@ import { LivePadService } from '../../services/livepad.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'home-panel',
+  selector: 'app-home-panel',
   templateUrl: './home-panel.component.html',
   styleUrls: ['./home-panel.component.css']
 })
 
-export class HomePanel{
+export class HomePanelComponent {
   public qrcontent: string;
-  public livePadService: LivePadService;
-  public router : Router;
 
-  constructor(public _livePadService : LivePadService,
-              private _router: Router){
-    this.livePadService = _livePadService;
-    this.router = _router;
-    this.qrcontent = this.livePadService.uuid;
+  constructor(public livePadService: LivePadService, private router: Router) {
+    this.qrcontent = this.livePadService.uuid + '|' + this.livePadService.encryptionKey;
   }
  
-  navDraw(){
+  navDraw() {
     this.router.navigate(['draw']);
   }
 

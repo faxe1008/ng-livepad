@@ -1,14 +1,16 @@
-<div style="max-width: 150px; margin-bottom:5px;margin-top:5px;">
-    <user-display></user-display>
+<div style="margin-bottom:5px;margin-top:5px; display:flex;">
+        <div style="margin-right: 5px">
+                <button mat-fab color="accent" (click)="openQRCodeDialog()">
+                        <mat-icon aria-label="add user">add</mat-icon>
+                </button>
+        </div>
+        <div style="max-width: 150px;margin-top:5px">
+            <app-user-display></app-user-display>  
+        </div>
 </div>
 
 <mat-card>
-    
-      
         <mat-card-content>
-            
-            
-            
             <div class="canvasContainer" #canvasContainer>
                     <div style="float:right; z-index:3;">
                             <button style="z-index:4;" mat-icon-button (click)="downloadImage()" color="accent">

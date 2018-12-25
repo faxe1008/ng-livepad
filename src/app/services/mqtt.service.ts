@@ -7,5 +7,5 @@ import {
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'livepad.ddns.net',
   port: 9001,
-  protocol: "wss" 
+  protocol: 'wss' 
 };
