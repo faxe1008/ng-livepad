@@ -43,7 +43,9 @@ export class DrawingCanvasComponent implements OnInit{
        history : this.canvas.getDrawingHistory()
      }
      this.mqttService.unsafePublish(this.livePadService.uuid + '/join/' + user.name + '/accepted', JSON.stringify(response));
-   })
+     this.mqttService.unsafePublish(this.livePadService.uuid + '/start', '');
+
+    })
   }
 
   openQRCodeDialog() {
