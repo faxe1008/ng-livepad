@@ -38,11 +38,7 @@ export class DrawingCanvasComponent implements OnInit{
     });
 
    this.livePadService.onUserJoined().subscribe(user => {
-     let response = {
-       color : user.color,
-       history : this.canvas.getDrawingHistory()
-     }
-     this.mqttService.unsafePublish(this.livePadService.uuid + '/join/' + user.name + '/accepted', JSON.stringify(response));
+     this.mqttService.unsafePublish(this.livePadService.uuid + '/join/' + user.name + '/accepted', JSON.stringify(user));
      this.mqttService.unsafePublish(this.livePadService.uuid + '/start', '');
 
     })

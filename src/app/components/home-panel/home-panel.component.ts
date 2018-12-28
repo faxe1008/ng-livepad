@@ -19,7 +19,7 @@ export class HomePanelComponent {
   navDraw() {
     this.mqttService.unsafePublish(this.livePadService.uuid + "/start", "");
     this.router.navigate(['draw']);
-
+    this.livePadService.encryptMessage("test");
   }
 
 }

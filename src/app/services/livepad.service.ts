@@ -27,6 +27,7 @@ export class LivePadService {
 
     encryptMessage(message: string) {
         return this._encryptionService.generateKey(this.encryptionKey).then(key => {
+            console.log(key)
             return this._encryptionService.encrypt(message, key);
         });
     }
