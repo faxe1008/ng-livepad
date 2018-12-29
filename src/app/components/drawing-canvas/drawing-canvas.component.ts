@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, ViewChild ,OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild ,OnInit } from '@angular/core';
 import { CanvasWhiteboardComponent, CanvasWhiteboardUpdate, CanvasWhiteboardService } from 'ng2-canvas-whiteboard';
 import { LivePadService } from '../../services/livepad.service';
 import { Inject } from '@angular/core';
@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { User } from '../../model/user';
 import { QrcodeDialogComponent } from '../qrcode-dialog/qrcode-dialog.component';
 import { Subscription } from 'rxjs';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-drawing-canvas',
@@ -37,11 +38,15 @@ export class DrawingCanvasComponent implements OnInit{
       this.canvasWhiteboardService.drawCanvas(updates);
     });
 
+
    this.livePadService.onUserJoined().subscribe(user => {
      this.mqttService.unsafePublish(this.livePadService.uuid + '/join/' + user.name + '/accepted', JSON.stringify(user));
      this.mqttService.unsafePublish(this.livePadService.uuid + '/start', '');
+     this.mqttService.unsafePublish(this.livePadService.uuid + "/history/" + user.name + "/get/accepted", JSON.stringify(this.canvas.getDrawingHistory));
+    });
 
-    })
+   
+
   }
 
   openQRCodeDialog() {
@@ -49,10 +54,6 @@ export class DrawingCanvasComponent implements OnInit{
       width: '500px',
       data: {qrcontent: this.livePadService.uuid + '|' + this.livePadService.encryptionKey}
     });
-  }
-
-  sendBatchUpdate(updates: CanvasWhiteboardUpdate[]) {
-    console.log(JSON.stringify(updates));
   }
 
   fullScreenCanvas() {
