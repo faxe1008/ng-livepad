@@ -44,10 +44,12 @@ export class DrawingCanvasComponent implements OnInit{
    this.livePadService.onUserJoined().subscribe(user => {
      this.mqttService.unsafePublish(this.livePadService.uuid + '/join/' + user.name + '/accepted', JSON.stringify(user));
      this.mqttService.unsafePublish(this.livePadService.uuid + '/start', '');
-     this.mqttService.unsafePublish(this.livePadService.uuid + "/history/" + user.name + "/get/accepted", JSON.stringify(this.canvas.getDrawingHistory));
-    });
+   });
 
-   
+   this.mqttService.observe(this.livePadService.uuid + "/history/+/get").subscribe((message: IMqttMessage)=>{
+    const user = this.livePadService.getUserByName(message.topic.split('/')[2]);
+    this.mqttService.unsafePublish(this.livePadService.uuid + "/history/" + user.name + "/get/accepted", JSON.stringify(this.canvas.getDrawingHistory()), {qos: 2, retain: true});
+   });
 
   }
 
