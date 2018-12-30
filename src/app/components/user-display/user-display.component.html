@@ -8,7 +8,8 @@
   
   <div *ngFor="let user of livePadService.users" style="margin-bottom: 5px;">
       <avatar [name]="user.name" [displayType]="'circle'" size="20" [background]="user.color"></avatar>
-      <div style="display: inline-block">{{user.name}}</div>
+      <div *ngIf="!drawingRestrictable" style="display: inline-block">{{user.name}}</div>
+      <mat-slide-toggle *ngIf="drawingRestrictable" [checked]="user.allowed" labelPosition="before">{{user.name}}</mat-slide-toggle>
   </div>
 
 </mat-expansion-panel>

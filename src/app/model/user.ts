@@ -1,6 +1,7 @@
 export class User {
     name: string;
     color: string;
+    allowed: boolean = true;
 
     constructor(_name: string) {
         this.name = _name;

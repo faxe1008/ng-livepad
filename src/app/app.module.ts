@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatDialogModule, MatProgressSpinnerModule, MatFormFieldModule, MatCardModule, MatIconModule, MatSnackBarModule} from '@angular/material';
+import { MatButtonModule, MatSlideToggleModule, MatDialogModule, MatProgressSpinnerModule, MatFormFieldModule, MatCardModule, MatIconModule, MatSnackBarModule} from '@angular/material';
 import { QRCodeModule } from 'angularx-qrcode';
 import { HomePanelComponent } from './components/home-panel/home-panel.component';
 import { DrawingCanvasComponent } from './components/drawing-canvas/drawing-canvas.component';
@@ -42,7 +42,7 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     EncryptionServiceModule.forRoot(),
     CanvasWhiteboardModule,
     QRCodeModule,
-    MatButtonModule, MatDialogModule, MatProgressSpinnerModule, MatFormFieldModule, MatCardModule, MatExpansionModule, MatIconModule, MatSnackBarModule,
+    MatButtonModule,MatSlideToggleModule, MatDialogModule, MatProgressSpinnerModule, MatFormFieldModule, MatCardModule, MatExpansionModule, MatIconModule, MatSnackBarModule,
     AppRoutingModule
   ],
   entryComponents: [SnackbarMessageComponent, QrcodeDialogComponent],

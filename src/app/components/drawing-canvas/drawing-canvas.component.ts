@@ -33,9 +33,11 @@ export class DrawingCanvasComponent implements OnInit{
   ngOnInit(): void {
     this.mqttService.observe(this.livePadService.uuid + '/draw/#').subscribe((message: IMqttMessage) => {
       const user = this.livePadService.getUserByName(message.topic.split('/')[2]);
-      const plainMessage = message.payload.toString();
-      let updates = JSON.parse(plainMessage) as CanvasWhiteboardUpdate[];
-      this.canvasWhiteboardService.drawCanvas(updates);
+      if(user.allowed){
+        const plainMessage = message.payload.toString();
+        let updates = JSON.parse(plainMessage) as CanvasWhiteboardUpdate[];
+        this.canvasWhiteboardService.drawCanvas(updates);
+      }
     });
 
 
