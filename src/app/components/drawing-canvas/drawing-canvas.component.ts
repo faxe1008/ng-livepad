@@ -53,6 +53,14 @@ export class DrawingCanvasComponent implements OnInit{
 
   }
 
+  undo(){
+    this.canvas.undo();
+  }
+
+  undoPerformed(updateUUID: string){
+    console.log(updateUUID);
+  }
+
   openQRCodeDialog() {
     const dialogRef = this.dialog.open(QrcodeDialogComponent, {
       width: '500px',

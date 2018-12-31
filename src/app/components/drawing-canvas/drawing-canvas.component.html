@@ -25,7 +25,8 @@
                             [drawButtonEnabled]="false"
 							[clearButtonEnabled]="false"
                             [showShapeSelector]="false"
-                            [shapeSelectorEnabled]="false"></canvas-whiteboard>
+                            [shapeSelectorEnabled]="false"
+                            (onUndo)="undoPerformed($event)"></canvas-whiteboard>
             </div>
                 
                 

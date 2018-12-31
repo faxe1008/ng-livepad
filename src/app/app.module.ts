@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatSlideToggleModule, MatDialogModule, MatProgressSpinnerModule, MatFormFieldModule, MatCardModule, MatIconModule, MatSnackBarModule} from '@angular/material';
@@ -16,14 +16,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { AvatarModule } from 'ng2-avatar';
 import { UserDisplayComponent } from './components/user-display/user-display.component';
 import { SnackbarMessageComponent } from './components/snackbar-message/snackbar-message.component';
-import { CRYPT_CONFIG_PROVIDER, CryptConfigProvider, EncryptionServiceModule } from 'angular-encryption-service';
 import { QrcodeDialogComponent } from './components/qrcode-dialog/qrcode-dialog.component';
 
-const AppCryptConfigProvider: CryptConfigProvider = {
-  getSalt(): Promise<string> {
-    return Promise.resolve('saltsalt');
-  }
-};
+
  
 @NgModule({
   declarations: [
@@ -35,18 +30,18 @@ const AppCryptConfigProvider: CryptConfigProvider = {
     QrcodeDialogComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
     AvatarModule.forRoot(),
-    EncryptionServiceModule.forRoot(),
     CanvasWhiteboardModule,
     QRCodeModule,
     MatButtonModule,MatSlideToggleModule, MatDialogModule, MatProgressSpinnerModule, MatFormFieldModule, MatCardModule, MatExpansionModule, MatIconModule, MatSnackBarModule,
     AppRoutingModule
   ],
   entryComponents: [SnackbarMessageComponent, QrcodeDialogComponent],
-  providers: [ LivePadService, {provide: CRYPT_CONFIG_PROVIDER, useValue: AppCryptConfigProvider} ],
+  providers: [ LivePadService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

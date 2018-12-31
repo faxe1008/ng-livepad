@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
-import { EncryptionService } from 'angular-encryption-service';
 import { UUID } from 'angular2-uuid';
 import { ReplaySubject, Observable } from 'rxjs';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class LivePadService {
@@ -11,9 +11,10 @@ export class LivePadService {
     encryptionKey: string;
     userStream: ReplaySubject<User> = new ReplaySubject();
 
-    constructor(private _encryptionService: EncryptionService) {
+
+    constructor() {
         this.uuid = UUID.UUID();
-        this.encryptionKey = this.randomString(12, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');        
+        this.encryptionKey = this.randomString(16, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');        
     }
 
     onUserJoined(): Observable<User> {
@@ -26,15 +27,18 @@ export class LivePadService {
     }
 
     encryptMessage(message: string) {
-        return this._encryptionService.generateKey(this.encryptionKey).then(key => {
-            console.log(key)
-            return this._encryptionService.encrypt(message, key);
+         return CryptoJS.AES.encrypt(message, this.encryptionKey, {
+            keySize: 16,
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
         });
     }
 
     decryptMessage(message: string) {
-        return this._encryptionService.generateKey(this.encryptionKey).then(key => {
-            return this._encryptionService.decrypt(message, key);
+        return CryptoJS.AES.decrypt(message, this.encryptionKey, {
+            keySize: 16,
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
         });
     }
 
